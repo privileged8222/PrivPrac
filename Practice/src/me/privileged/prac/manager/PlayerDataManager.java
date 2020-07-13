@@ -12,7 +12,6 @@ public class PlayerDataManager {
 	
 	private HashMap<String, PlayerData> playerDatas;
 	
-	
 	public PlayerDataManager() {
 		this.playerDatas = new HashMap<>();
 	}
