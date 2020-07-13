@@ -4,6 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import me.privileged.prac.commands.Build;
+import me.privileged.prac.events.BlockBreakPlaceEvent;
 import me.privileged.prac.events.PlayerJoinLeaveEvent;
 import me.privileged.prac.manager.PlayerDataManager;
 
@@ -34,10 +36,16 @@ public class Main extends JavaPlugin{
 	private void setup() {
 		this.registerListeners();
 		this.setupManagers();
+		this.setupCommands();
 	}
 
 	private void registerListeners() {
 		this.getServer().getPluginManager().registerEvents(new PlayerJoinLeaveEvent(this), this);
+		this.getServer().getPluginManager().registerEvents(new BlockBreakPlaceEvent(this), this);
+	}
+	
+	private void setupCommands() {
+		this.getCommand("build").setExecutor(new Build());
 	}
 	
 	private void setupManagers() {
