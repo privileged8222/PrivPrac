@@ -6,3 +6,5 @@ author: Privileged
 commands:
   build:
     description: "Toggles build mode"
+  info:
+    description: "Shows info for given player"

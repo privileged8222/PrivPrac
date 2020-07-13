@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
 import me.privileged.prac.commands.Build;
+import me.privileged.prac.commands.Info;
 import me.privileged.prac.events.BlockBreakPlaceEvent;
 import me.privileged.prac.events.PlayerEvents;
 import me.privileged.prac.events.PlayerJoinLeaveEvent;
@@ -53,6 +54,7 @@ public class Main extends JavaPlugin{
 	
 	private void setupCommands() {
 		this.getCommand("build").setExecutor(new Build());
+		this.getCommand("info").setExecutor(new Info());
 	}
 	
 	public void registerTasks() {

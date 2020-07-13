@@ -17,7 +17,7 @@ public class PlayerData {
 		this.gameState = PlayerGameState.NONE;
 	}
 	
-	public PlayerGameState getGameSate() {
+	public PlayerGameState getGameState() {
 		return this.gameState;
 	}
 	 
@@ -25,6 +25,39 @@ public class PlayerData {
 		this.gameState = gameState;
 	}
 
+	public boolean isQueuing() {
+		if (getGameState() == PlayerGameState.QUEUING_RANKED ||
+				getGameState() == PlayerGameState.QUEUING_UNRANKED) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean isSpectator() {
+		if (getGameState() == PlayerGameState.SPECTATOR ||
+				getGameState() == PlayerGameState.EVENT_SPECTATOR) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public boolean isInGame() {
+		if (getGameState() == PlayerGameState.INGAME || 
+				getGameState() == PlayerGameState.EVENT_INGAME ||
+				getGameState() == PlayerGameState.WARMUP ||
+				getGameState() == PlayerGameState.EVENT_WARMUP ||
+				getGameState() == PlayerGameState.WON ||
+				getGameState() == PlayerGameState.EVENT_WON ||
+				getGameState() == PlayerGameState.LOST ||
+				getGameState() == PlayerGameState.EVENT_LOST) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public String getUuid() {
 		return this.uuid;
 	}

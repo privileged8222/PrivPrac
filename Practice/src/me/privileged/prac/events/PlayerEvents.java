@@ -25,11 +25,11 @@ public class PlayerEvents implements Listener{
 		if (event.getEntity() instanceof Player) {
 			Player player = (Player) event.getEntity();
 			PlayerData playerData = Main.getInstance().getPlayerDataManager().get(player);
-			if (playerData.getGameSate() == PlayerGameState.NONE || 
-					playerData.getGameSate() == PlayerGameState.SPECTATOR || playerData.getGameSate() == PlayerGameState.EVENT_SPECTATOR ||
-					playerData.getGameSate() == PlayerGameState.WARMUP || playerData.getGameSate() == PlayerGameState.EVENT_WARMUP ||
-					playerData.getGameSate() == PlayerGameState.WON || playerData.getGameSate() == PlayerGameState.LOST ||
-					playerData.getGameSate() == PlayerGameState.EVENT_WON || playerData.getGameSate() == PlayerGameState.EVENT_LOST) {
+			if (playerData.getGameState() == PlayerGameState.NONE || 
+					playerData.getGameState() == PlayerGameState.SPECTATOR || playerData.getGameState() == PlayerGameState.EVENT_SPECTATOR ||
+					playerData.getGameState() == PlayerGameState.WARMUP || playerData.getGameState() == PlayerGameState.EVENT_WARMUP ||
+					playerData.getGameState() == PlayerGameState.WON || playerData.getGameState() == PlayerGameState.LOST ||
+					playerData.getGameState() == PlayerGameState.EVENT_WON || playerData.getGameState() == PlayerGameState.EVENT_LOST) {
 				event.setCancelled(true);
 			}
 		}
@@ -40,11 +40,11 @@ public class PlayerEvents implements Listener{
 		if (event.getEntity() instanceof Player) {
 			Player player = (Player) event.getEntity();
 			PlayerData playerData = Main.getInstance().getPlayerDataManager().get(player);
-			if (playerData.getGameSate() == PlayerGameState.NONE || 
-					playerData.getGameSate() == PlayerGameState.SPECTATOR || playerData.getGameSate() == PlayerGameState.EVENT_SPECTATOR ||
-					playerData.getGameSate() == PlayerGameState.WARMUP || playerData.getGameSate() == PlayerGameState.EVENT_WARMUP ||
-					playerData.getGameSate() == PlayerGameState.WON || playerData.getGameSate() == PlayerGameState.LOST ||
-					playerData.getGameSate() == PlayerGameState.EVENT_WON || playerData.getGameSate() == PlayerGameState.EVENT_LOST) {
+			if (playerData.getGameState() == PlayerGameState.NONE || 
+					playerData.getGameState() == PlayerGameState.SPECTATOR || playerData.getGameState() == PlayerGameState.EVENT_SPECTATOR ||
+					playerData.getGameState() == PlayerGameState.WARMUP || playerData.getGameState() == PlayerGameState.EVENT_WARMUP ||
+					playerData.getGameState() == PlayerGameState.WON || playerData.getGameState() == PlayerGameState.LOST ||
+					playerData.getGameState() == PlayerGameState.EVENT_WON || playerData.getGameState() == PlayerGameState.EVENT_LOST) {
 				event.setCancelled(true);
 			}
 		}
@@ -54,11 +54,11 @@ public class PlayerEvents implements Listener{
 	public void onPlayerDropItemEvent(PlayerDropItemEvent event) {
 		Player player = (Player) event.getPlayer();
 		PlayerData playerData = Main.getInstance().getPlayerDataManager().get(player);
-		if (playerData.getGameSate() == PlayerGameState.NONE || 
-				playerData.getGameSate() == PlayerGameState.SPECTATOR || playerData.getGameSate() == PlayerGameState.EVENT_SPECTATOR ||
-				playerData.getGameSate() == PlayerGameState.WARMUP || playerData.getGameSate() == PlayerGameState.EVENT_WARMUP ||
-				playerData.getGameSate() == PlayerGameState.WON || playerData.getGameSate() == PlayerGameState.LOST ||
-				playerData.getGameSate() == PlayerGameState.EVENT_WON || playerData.getGameSate() == PlayerGameState.EVENT_LOST) {
+		if (playerData.getGameState() == PlayerGameState.NONE || 
+				playerData.getGameState() == PlayerGameState.SPECTATOR || playerData.getGameState() == PlayerGameState.EVENT_SPECTATOR ||
+				playerData.getGameState() == PlayerGameState.WARMUP || playerData.getGameState() == PlayerGameState.EVENT_WARMUP ||
+				playerData.getGameState() == PlayerGameState.WON || playerData.getGameState() == PlayerGameState.LOST ||
+				playerData.getGameState() == PlayerGameState.EVENT_WON || playerData.getGameState() == PlayerGameState.EVENT_LOST) {
 			event.setCancelled(true);
 		}
 	}
@@ -67,11 +67,11 @@ public class PlayerEvents implements Listener{
 	public void onPlayerPickupItemEvent(PlayerPickupItemEvent event) {
 		Player player = (Player) event.getPlayer();
 		PlayerData playerData = Main.getInstance().getPlayerDataManager().get(player);
-		if (playerData.getGameSate() == PlayerGameState.NONE || 
-				playerData.getGameSate() == PlayerGameState.SPECTATOR || playerData.getGameSate() == PlayerGameState.EVENT_SPECTATOR ||
-				playerData.getGameSate() == PlayerGameState.WARMUP || playerData.getGameSate() == PlayerGameState.EVENT_WARMUP ||
-				playerData.getGameSate() == PlayerGameState.WON || playerData.getGameSate() == PlayerGameState.LOST ||
-				playerData.getGameSate() == PlayerGameState.EVENT_WON || playerData.getGameSate() == PlayerGameState.EVENT_LOST) {
+		if (playerData.getGameState() == PlayerGameState.NONE || 
+				playerData.getGameState() == PlayerGameState.SPECTATOR || playerData.getGameState() == PlayerGameState.EVENT_SPECTATOR ||
+				playerData.getGameState() == PlayerGameState.WARMUP || playerData.getGameState() == PlayerGameState.EVENT_WARMUP ||
+				playerData.getGameState() == PlayerGameState.WON || playerData.getGameState() == PlayerGameState.LOST ||
+				playerData.getGameState() == PlayerGameState.EVENT_WON || playerData.getGameState() == PlayerGameState.EVENT_LOST) {
 			event.setCancelled(true);
 		}
 	}
