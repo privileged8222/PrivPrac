@@ -19,6 +19,7 @@ public class Main extends JavaPlugin{
 	}
 		
 	public void onEnable() {
+		this.instance = this;
 		log(ChatColor.DARK_GREEN + "PrivPrac" + ChatColor.GREEN + " Has been ENABLED");
 		setup();
 	}
@@ -37,7 +38,7 @@ public class Main extends JavaPlugin{
 	}
 
 	private void registerListeners() {
-		this.getServer().getPluginManager().registerEvents((Listener)new PlayerJoinLeaveEvent(), (Plugin)this);
+		this.getServer().getPluginManager().registerEvents(new PlayerJoinLeaveEvent(this), this);
 	}
 	
 	private void setupManagers() {

@@ -10,21 +10,12 @@ import me.privileged.prac.main.Main;
 import net.md_5.bungee.api.ChatColor;
 
 public class PlayerDataManager {
-
-	public static PlayerDataManager instance;	
+	
 	private HashMap<String, PlayerData> playerDatas;
 	
 	
 	public PlayerDataManager() {
-		this.instance = this;
-	}
-	
-	public static void loadAllPlayerData() {
-		
-	}
-	
-	public static void saveAllPlayerData() {
-		
+		this.playerDatas = new HashMap<>();
 	}
 	
 	public PlayerData get(Player player) {
@@ -48,10 +39,14 @@ public class PlayerDataManager {
 	}
 	
 	private void finalisedAdd(String uuid) {
-		if (this.playerDatas.containsKey(uuid)) {
-			Main.getInstance().log(ChatColor.RED + "Player data for: " + uuid + " is already stored, ignoring.");
-		} else {
-			this.playerDatas.put(uuid, new PlayerData(Main.getInstance(), uuid));
+		if (this.playerDatas != null) {
+			if (this.playerDatas.containsKey(uuid)) {
+				Main.getInstance().log(ChatColor.RED + "Player data for: " + uuid + " is already stored, ignoring.");
+			} else {
+				this.playerDatas.put(uuid, new PlayerData(uuid));
+			}
+		} else{
+			Main.getInstance().log(ChatColor.RED + "Error loading playerData");
 		}
 	}
 	
