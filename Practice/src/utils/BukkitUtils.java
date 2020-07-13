@@ -63,22 +63,4 @@ public class BukkitUtils {
 		}
 		return counter;
 	}
-	
-	public static void createScoreboard(String title, HashMap<Integer, String> map, Player player) {
-		ScoreboardManager manager = Bukkit.getScoreboardManager();
-		Scoreboard board = manager.getNewScoreboard();
-        Objective objective = board.registerNewObjective(title, "");
-        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-        objective.setDisplayName(ChatColor.translateAlternateColorCodes('&',title));
-	    Iterator it = map.entrySet().iterator();
-	    while (it.hasNext()) {
-	        HashMap.Entry pair = (HashMap.Entry)it.next();
-	        Score score = objective.getScore(ChatColor.translateAlternateColorCodes('&', pair.getValue().toString()));
-	        score.setScore((int)pair.getKey());
-	        it.remove();
-	    }
-	    
-	    player.setScoreboard(board);
-	}
-	
 }
