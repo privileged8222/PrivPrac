@@ -2,8 +2,6 @@ package me.privileged.prac.main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.privileged.prac.events.PlayerJoinLeaveEvent;
@@ -18,6 +16,7 @@ public class Main extends JavaPlugin{
 		Bukkit.getServer().getConsoleSender().sendMessage(msg);
 	}
 		
+	@SuppressWarnings("static-access")
 	public void onEnable() {
 		this.instance = this;
 		log(ChatColor.DARK_GREEN + "PrivPrac" + ChatColor.GREEN + " Has been ENABLED");

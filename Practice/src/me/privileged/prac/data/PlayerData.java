@@ -1,5 +1,10 @@
 package me.privileged.prac.data;
 
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 import me.privileged.prac.enums.PlayerGameState;
 
 public class PlayerData {
@@ -20,5 +25,11 @@ public class PlayerData {
 		this.gameState = gameState;
 	}
 
+	public String getUuid() {
+		return this.uuid;
+	}
 	
+	public Player getPlayer() {
+		return Bukkit.getPlayer(UUID.fromString(this.uuid));
+	}
 }
