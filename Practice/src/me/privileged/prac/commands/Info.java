@@ -11,6 +11,8 @@ import me.privileged.prac.data.PlayerData;
 import me.privileged.prac.enums.PlayerGameState;
 import me.privileged.prac.main.Main;
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.TextComponent;
+import utils.BukkitUtils;
 
 public class Info implements CommandExecutor{
 
@@ -39,7 +41,8 @@ public class Info implements CommandExecutor{
 				sender.sendMessage(" ");
 				sender.sendMessage(ChatColor.GOLD + playerData.getPlayer().getName() + ChatColor.YELLOW + "'s Info");
 				sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");
-				sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + inGame);
+				if (playerData.isInGame()) {((Player) sender).spigot().sendMessage(BukkitUtils.buildTextComponent("&6 * &e" + inGame, "&eClick to &6Spectate", "/spec " + playerData.getPlayer().getName()));}
+				else {((Player) sender).spigot().sendMessage(BukkitUtils.buildTextComponent("&6 * &e" + inGame, "&eClick to &6Duel", "/duel " + playerData.getPlayer().getName()));}
 				sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + spectating);
 				sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + queuing);
 				sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");

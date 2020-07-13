@@ -13,6 +13,7 @@ import me.privileged.prac.events.PlayerJoinLeaveEvent;
 import me.privileged.prac.events.WorldEvents;
 import me.privileged.prac.manager.PlayerDataManager;
 import me.privileged.prac.tasks.KeepDayTask;
+import me.privileged.prac.tasks.ScoreboardTask;
 
 public class Main extends JavaPlugin{
 
@@ -57,9 +58,10 @@ public class Main extends JavaPlugin{
 		this.getCommand("info").setExecutor(new Info());
 	}
 	
+	@SuppressWarnings("unused")
 	public void registerTasks() {
-		@SuppressWarnings("unused")
-		BukkitTask freezeTask = new KeepDayTask(this).runTaskTimer(this, 0L, 5L);
+		BukkitTask freezeTask = new KeepDayTask(this).runTaskTimerAsynchronously(this, 0L, 5L);
+		BukkitTask scoreboardTask = new ScoreboardTask(this).runTaskTimerAsynchronously(this, 0, 0L);
 	}
 	
 	private void setupManagers() {
