@@ -2,6 +2,7 @@ package me.privileged.prac.manager;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -27,11 +28,11 @@ public class LadderManager {
 		List<String> listOfLadders = Main.getInstance().getConfigManager().getLadders().getStringList("ladders");
 		for (String currentLadderName : listOfLadders) {
 			ItemStack display = null;
-			int uid = Integer.valueOf(Main.getInstance().getConfigManager().getLadders().getString("ladders." + currentLadderName + ".uid"));
-			LadderMode mode = interpretLadderMode(Main.getInstance().getConfigManager().getLadders().getString("ladders." + currentLadderName + ".mode"));
-			LadderKitType kitType = interpretLadderKitType(Main.getInstance().getConfigManager().getLadders().getString("ladders." + currentLadderName + ".kittype"));
+			int uid = Integer.valueOf(Main.getInstance().getConfigManager().getLadders().getString("ladder." + currentLadderName + ".uid"));
+			LadderMode mode = interpretLadderMode(Main.getInstance().getConfigManager().getLadders().getString("ladder." + currentLadderName + ".mode"));
+			LadderKitType kitType = interpretLadderKitType(Main.getInstance().getConfigManager().getLadders().getString("ladder." + currentLadderName + ".kittype"));
 			try {
-				display = InventoryUtils.itemStackArrayFromBase64(Main.getInstance().getConfigManager().getLadders().getString("ladders." + currentLadderName + ".displayitem"))[0];
+				display = InventoryUtils.itemStackArrayFromBase64(Main.getInstance().getConfigManager().getLadders().getString("ladder." + currentLadderName + ".displayitem"))[0];
 				ladders.add(new Ladder(currentLadderName, mode, kitType, display, uid));
 			} catch (IOException e) {
 				Main.getInstance().getInstance().log(ChatColor.RED + "Failed to read display item for ladder " + currentLadderName + ", skipping");
@@ -68,7 +69,6 @@ public class LadderManager {
 	}
 	
 	public void create(String ladderName, LadderMode mode, ItemStack display) {
-		Bukkit.broadcastMessage("lol");
 		int uid = getLatestLadder() + 1;
 		List<String> listOfLadders = Main.getInstance().getConfigManager().getLadders().getStringList("ladders");
 		listOfLadders.add(String.valueOf(ladderName));
@@ -86,6 +86,16 @@ public class LadderManager {
 		add(new Ladder(ladderName, mode, LadderKitType.EMPTY, display, uid));
 	}
 	
+	public void delete(String name) {
+		Main.getInstance().getConfigManager().reloadLadders();
+		List<String> listOfLadders = Main.getInstance().getConfigManager().getLadders().getStringList("ladders");
+		listOfLadders.remove(String.valueOf(name));
+		Main.getInstance().getConfigManager().getLadders().set("ladders", listOfLadders);
+		Main.getInstance().getConfigManager().saveLadders();
+		Main.getInstance().getConfigManager().reloadLadders();
+		remove(name);
+	}
+	
 	public void remove(int uid) {
 		for (Ladder ladder : this.ladders) {
 			if (ladder.getUid() == uid) {
@@ -100,10 +110,28 @@ public class LadderManager {
 		for (Ladder ladder : this.ladders) {
 			if (ladder.getFriendlyName().equalsIgnoreCase(name)) {
 				this.ladders.remove(ladder);
+				return;
+			}
+		}
+	}
+	
+	public boolean doesExist(String name) {
+		for (Ladder ladder : this.ladders) {
+			if (ladder.getFriendlyName().equalsIgnoreCase(name)) {
+				return true;
 			} else {
 				continue;
 			}
 		}
+		return false;
+	}
+	
+	public ArrayList<String> getCurrentLadders() {
+		ArrayList<String> finalReturn = new ArrayList<>();
+		for (Ladder ladder : this.ladders) {
+			finalReturn.add(ladder.getFriendlyName());
+		}
+		return finalReturn;
 	}
 	
 	private LadderMode interpretLadderMode(String mode) {

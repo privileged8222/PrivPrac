@@ -24,8 +24,36 @@ public class Prac implements CommandExecutor {
 					switch (args[1].toLowerCase()) {
 					case "create":
 						if (args.length == 3) {
-							Main.getInstance().getLadderManager().create(args[2], LadderMode.REGULAR, new ItemStack(Material.DIAMOND_SWORD));
-							Bukkit.broadcastMessage("test");
+							if (!Main.getInstance().getLadderManager().doesExist(args[2])) {
+								Main.getInstance().getLadderManager().create(args[2], LadderMode.REGULAR, new ItemStack(Material.DIAMOND_SWORD));
+								sender.sendMessage(ChatColor.GREEN + "Ladder '" + args[2] + "' created successfully.");
+							} else {
+								sender.sendMessage(ChatColor.RED + "Ladder '" + args[2] + "' cannot be created because it already exists.");
+							}
+						}
+						break;
+					case "delete":
+						if (args.length == 3) {
+							if (Main.getInstance().getLadderManager().doesExist(args[2])) {
+								Main.getInstance().getLadderManager().delete(args[2]);
+								sender.sendMessage(ChatColor.GREEN + "Ladder '" + args[2] + "' deleted successfully.");
+							} else {
+								sender.sendMessage(ChatColor.RED + "Ladder '" + args[2] + "' cannot be deleted because it does not exist.");
+							}
+						}
+						break;
+					case "list":
+						if (Main.getInstance().getLadderManager().getCurrentLadders().size() > 0) {
+							sender.sendMessage(" ");
+							sender.sendMessage(ChatColor.GOLD + "Current Ladders");
+							sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");
+							for (String currentLadder : Main.getInstance().getLadderManager().getCurrentLadders()) {
+								sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + currentLadder);
+							}
+							sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");
+							sender.sendMessage(" ");
+						} else {
+							sender.sendMessage(ChatColor.RED + "There are no ladders to show.");
 						}
 						break;
 					}
@@ -33,7 +61,9 @@ public class Prac implements CommandExecutor {
 					sender.sendMessage(" ");
 					sender.sendMessage(ChatColor.GOLD + "Help Menu");
 					sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");
-					sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac ladder create : " + ChatColor.GOLD + "Create a ladder");
+					sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac ladder create <name> : " + ChatColor.GOLD + "Create a ladder");
+					sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac ladder delete <name> : " + ChatColor.GOLD + "Delete a ladder");
+					sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac ladder list : " + ChatColor.GOLD + "Lists all ladders");
 					sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");
 				}
 				break;
