@@ -8,11 +8,6 @@ import me.privileged.prac.main.Main;
 
 public class WorldEvents implements Listener{
 
-	static Main plugin;
-	public WorldEvents(Main main) {
-		plugin = main;
-	}
-	
 	@EventHandler
 	public void onWeatherChange(WeatherChangeEvent event) {
 		event.setCancelled(true);

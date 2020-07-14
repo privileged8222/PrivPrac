@@ -12,8 +12,15 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
-public class ScoreboardUtils {
+/*
+ * 
+ * https://github.com/crisdev333/ProScoreboard/blob/master/src/me/crisdev333/proscoreboard/ScoreHelper.java
+ * crisdev333 @ github
+ * 
+ */
 
+public class ScoreboardUtils {
+	
 	private static HashMap<UUID, ScoreboardUtils> players = new HashMap<>();
 
 	public static ScoreboardUtils create(Player player) {

@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
@@ -15,11 +16,6 @@ import me.privileged.prac.manager.PlayerDataManager;
 
 public class PlayerEvents implements Listener{
 
-	static Main plugin;
-	public PlayerEvents(Main main) {
-		plugin = main;
-	}
-	
 	@EventHandler
 	public void onEntityDamageEvent(EntityDamageEvent event) {
 		if (event.getEntity() instanceof Player) {
@@ -72,6 +68,14 @@ public class PlayerEvents implements Listener{
 				playerData.getGameState() == PlayerGameState.WARMUP || playerData.getGameState() == PlayerGameState.EVENT_WARMUP ||
 				playerData.getGameState() == PlayerGameState.WON || playerData.getGameState() == PlayerGameState.LOST ||
 				playerData.getGameState() == PlayerGameState.EVENT_WON || playerData.getGameState() == PlayerGameState.EVENT_LOST) {
+			event.setCancelled(true);
+		}
+	}
+	
+	@EventHandler
+	public void onFoodLevelChangeEvent(FoodLevelChangeEvent event) {
+		PlayerData playerData = Main.getInstance().getPlayerDataManager().get((Player) event.getEntity());
+		if (!(playerData.isInGame())) {
 			event.setCancelled(true);
 		}
 	}

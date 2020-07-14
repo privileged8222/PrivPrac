@@ -7,15 +7,10 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import me.privileged.prac.main.Main;
+import me.privileged.prac.manager.InventoryManager;
 import utils.ScoreboardUtils;
 
 public class PlayerJoinLeaveEvent implements Listener{
-
-	static Main plugin;
-	public PlayerJoinLeaveEvent(Main main) {
-		plugin = main;
-	}
-	
 	
 	@EventHandler
 	public void onPlayerLoginEvent(PlayerLoginEvent event) {
@@ -30,5 +25,6 @@ public class PlayerJoinLeaveEvent implements Listener{
 	@EventHandler
 	public void onPlayerJoinEvent(PlayerJoinEvent event) {
 		ScoreboardUtils.create(event.getPlayer());
+		InventoryManager.setupLobbyInventory(event.getPlayer());
 	}
 }

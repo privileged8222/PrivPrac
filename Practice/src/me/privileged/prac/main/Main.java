@@ -8,6 +8,7 @@ import org.bukkit.scheduler.BukkitTask;
 import me.privileged.prac.commands.Build;
 import me.privileged.prac.commands.Info;
 import me.privileged.prac.events.BlockBreakPlaceEvent;
+import me.privileged.prac.events.InventoryEvents;
 import me.privileged.prac.events.PlayerEvents;
 import me.privileged.prac.events.PlayerJoinLeaveEvent;
 import me.privileged.prac.events.WorldEvents;
@@ -47,10 +48,11 @@ public class Main extends JavaPlugin{
 	}
 
 	private void registerListeners() {
-		this.getServer().getPluginManager().registerEvents(new PlayerJoinLeaveEvent(this), this);
-		this.getServer().getPluginManager().registerEvents(new BlockBreakPlaceEvent(this), this);
-		this.getServer().getPluginManager().registerEvents(new PlayerEvents(this), this);
-		this.getServer().getPluginManager().registerEvents(new WorldEvents(this), this);
+		this.getServer().getPluginManager().registerEvents(new PlayerJoinLeaveEvent(), this);
+		this.getServer().getPluginManager().registerEvents(new BlockBreakPlaceEvent(), this);
+		this.getServer().getPluginManager().registerEvents(new PlayerEvents(), this);
+		this.getServer().getPluginManager().registerEvents(new WorldEvents(), this);
+		this.getServer().getPluginManager().registerEvents(new InventoryEvents(), this);
 	}
 	
 	private void setupCommands() {

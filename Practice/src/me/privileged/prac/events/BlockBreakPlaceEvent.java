@@ -9,12 +9,6 @@ import me.privileged.prac.main.Main;
 import utils.CommandUtils;
 
 public class BlockBreakPlaceEvent implements Listener {
-
-	static Main plugin;
-	public BlockBreakPlaceEvent(Main main) {
-		plugin = main;
-	}
-	
 	
 	@EventHandler
 	public void onBlockBreakEvent(BlockBreakEvent event) {
