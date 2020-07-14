@@ -1,4 +1,4 @@
-package utils;
+package me.privileged.prac.utils;
 
 import java.util.HashMap;
 import java.util.Iterator;

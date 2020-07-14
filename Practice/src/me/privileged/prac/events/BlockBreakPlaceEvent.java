@@ -6,7 +6,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 import me.privileged.prac.main.Main;
-import utils.CommandUtils;
+import me.privileged.prac.utils.CommandUtils;
 
 public class BlockBreakPlaceEvent implements Listener {
 	

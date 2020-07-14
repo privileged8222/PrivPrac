@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
-import utils.CommandUtils;
+import me.privileged.prac.utils.CommandUtils;
 
 public class Build implements CommandExecutor{
 

@@ -7,8 +7,8 @@ import org.bukkit.entity.Player;
 
 import me.privileged.prac.data.PlayerData;
 import me.privileged.prac.main.Main;
-import utils.BukkitUtils;
-import utils.ScoreboardUtils;
+import me.privileged.prac.utils.BukkitUtils;
+import me.privileged.prac.utils.ScoreboardUtils;
 
 
 public class ScoreboardManager {

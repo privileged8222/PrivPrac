@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 import me.privileged.prac.main.Main;
 import me.privileged.prac.manager.InventoryManager;
-import utils.ScoreboardUtils;
+import me.privileged.prac.utils.ScoreboardUtils;
 
 public class PlayerJoinLeaveEvent implements Listener{
 	
