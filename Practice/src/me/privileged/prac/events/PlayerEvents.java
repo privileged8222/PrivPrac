@@ -13,6 +13,7 @@ import me.privileged.prac.data.PlayerData;
 import me.privileged.prac.enums.PlayerGameState;
 import me.privileged.prac.main.Main;
 import me.privileged.prac.manager.PlayerDataManager;
+import me.privileged.prac.utils.CommandUtils;
 
 public class PlayerEvents implements Listener{
 
@@ -21,11 +22,7 @@ public class PlayerEvents implements Listener{
 		if (event.getEntity() instanceof Player) {
 			Player player = (Player) event.getEntity();
 			PlayerData playerData = Main.getInstance().getPlayerDataManager().get(player);
-			if (playerData.getGameState() == PlayerGameState.NONE || 
-					playerData.getGameState() == PlayerGameState.SPECTATOR || playerData.getGameState() == PlayerGameState.EVENT_SPECTATOR ||
-					playerData.getGameState() == PlayerGameState.WARMUP || playerData.getGameState() == PlayerGameState.EVENT_WARMUP ||
-					playerData.getGameState() == PlayerGameState.WON || playerData.getGameState() == PlayerGameState.LOST ||
-					playerData.getGameState() == PlayerGameState.EVENT_WON || playerData.getGameState() == PlayerGameState.EVENT_LOST) {
+			if (!(playerData.isInGame())) {
 				event.setCancelled(true);
 			}
 		}
@@ -36,11 +33,7 @@ public class PlayerEvents implements Listener{
 		if (event.getEntity() instanceof Player) {
 			Player player = (Player) event.getEntity();
 			PlayerData playerData = Main.getInstance().getPlayerDataManager().get(player);
-			if (playerData.getGameState() == PlayerGameState.NONE || 
-					playerData.getGameState() == PlayerGameState.SPECTATOR || playerData.getGameState() == PlayerGameState.EVENT_SPECTATOR ||
-					playerData.getGameState() == PlayerGameState.WARMUP || playerData.getGameState() == PlayerGameState.EVENT_WARMUP ||
-					playerData.getGameState() == PlayerGameState.WON || playerData.getGameState() == PlayerGameState.LOST ||
-					playerData.getGameState() == PlayerGameState.EVENT_WON || playerData.getGameState() == PlayerGameState.EVENT_LOST) {
+			if (!(playerData.isInGame())) {
 				event.setCancelled(true);
 			}
 		}
@@ -50,11 +43,7 @@ public class PlayerEvents implements Listener{
 	public void onPlayerDropItemEvent(PlayerDropItemEvent event) {
 		Player player = (Player) event.getPlayer();
 		PlayerData playerData = Main.getInstance().getPlayerDataManager().get(player);
-		if (playerData.getGameState() == PlayerGameState.NONE || 
-				playerData.getGameState() == PlayerGameState.SPECTATOR || playerData.getGameState() == PlayerGameState.EVENT_SPECTATOR ||
-				playerData.getGameState() == PlayerGameState.WARMUP || playerData.getGameState() == PlayerGameState.EVENT_WARMUP ||
-				playerData.getGameState() == PlayerGameState.WON || playerData.getGameState() == PlayerGameState.LOST ||
-				playerData.getGameState() == PlayerGameState.EVENT_WON || playerData.getGameState() == PlayerGameState.EVENT_LOST) {
+		if (!(playerData.isInGame() || CommandUtils.buildPlayers.contains(player))) {
 			event.setCancelled(true);
 		}
 	}
@@ -63,11 +52,7 @@ public class PlayerEvents implements Listener{
 	public void onPlayerPickupItemEvent(PlayerPickupItemEvent event) {
 		Player player = (Player) event.getPlayer();
 		PlayerData playerData = Main.getInstance().getPlayerDataManager().get(player);
-		if (playerData.getGameState() == PlayerGameState.NONE || 
-				playerData.getGameState() == PlayerGameState.SPECTATOR || playerData.getGameState() == PlayerGameState.EVENT_SPECTATOR ||
-				playerData.getGameState() == PlayerGameState.WARMUP || playerData.getGameState() == PlayerGameState.EVENT_WARMUP ||
-				playerData.getGameState() == PlayerGameState.WON || playerData.getGameState() == PlayerGameState.LOST ||
-				playerData.getGameState() == PlayerGameState.EVENT_WON || playerData.getGameState() == PlayerGameState.EVENT_LOST) {
+		if (!(playerData.isInGame() || CommandUtils.buildPlayers.contains(player))) {
 			event.setCancelled(true);
 		}
 	}

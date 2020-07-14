@@ -4,7 +4,8 @@ version: 1.0
 author: Privileged
 
 commands:
-  build:
-    description: "Toggles build mode"
   info:
     description: "Shows info for given player"
+  prac:
+    description: "Main practice command"
+    aliases: ['practice', 'privprac'] 

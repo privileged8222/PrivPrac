@@ -8,6 +8,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import me.privileged.prac.data.PlayerData;
 import me.privileged.prac.main.Main;
+import me.privileged.prac.utils.CommandUtils;
 
 public class InventoryEvents implements Listener{
 
@@ -16,10 +17,12 @@ public class InventoryEvents implements Listener{
 		PlayerData playerData = Main.getInstance().getPlayerDataManager().get((Player) event.getWhoClicked());
 		switch (event.getClickedInventory().getTitle()) {
 		case "container.inventory": // default minecraft inventory title
-			if (!(playerData.isInGame())) {
+			if (!(playerData.isInGame() || CommandUtils.buildPlayers.contains(playerData.getPlayer()))) {
 				event.setCancelled(true);
 			}
-			break;
+			break;		
+		default:
+			return;
 		}
 	}
 	
