@@ -20,6 +20,9 @@ public class ConfigManager {
 	private File laddersFile;
 	private FileConfiguration laddersCfg;
 	
+	private File arenasFile;
+	private FileConfiguration arenasCfg;
+	
 	public ConfigManager() {
 		this.setup();
 	}
@@ -35,7 +38,7 @@ public class ConfigManager {
 			try {
 				globalsFile.createNewFile();
 			} catch (IOException e) {
-				Bukkit.getServer().getConsoleSender().sendMessage("failed to create globals.yml file");
+				Main.getInstance().log(ChatColor.RED + "failed to create globals.yml file");
 			}
 		}
 		
@@ -47,7 +50,7 @@ public class ConfigManager {
 			try {
 				playersFile.createNewFile();
 			} catch (IOException e) {
-				Bukkit.getServer().getConsoleSender().sendMessage("failed to create players.yml file");
+				Main.getInstance().log(ChatColor.RED + "failed to create players.yml file");
 			}
 		}
 		
@@ -59,11 +62,23 @@ public class ConfigManager {
 			try {
 				laddersFile.createNewFile();
 			} catch (IOException e) {
-				Bukkit.getServer().getConsoleSender().sendMessage("failed to create ladders.yml file");
+				Main.getInstance().log(ChatColor.RED + "failed to create ladders.yml file");
 			}
 		}
 		
 		laddersCfg = YamlConfiguration.loadConfiguration(laddersFile);
+		
+		arenasFile = new File(Main.getInstance().getDataFolder(), "arenas.yml");
+		
+		if (!arenasFile.exists()) {
+			try {
+				arenasFile.createNewFile();
+			} catch (IOException e){
+				Main.getInstance().log(ChatColor.RED + "failed to create arenas.yml file");
+			}
+		}
+		
+		arenasCfg = YamlConfiguration.loadConfiguration(arenasFile);
 		
 	}
 
@@ -79,6 +94,10 @@ public class ConfigManager {
 		return laddersCfg;
 	}
 	
+	public FileConfiguration getArenas() {
+		return arenasCfg;
+	}
+	
 	public void reloadGlobals() {
 		this.globalsCfg = YamlConfiguration.loadConfiguration(globalsFile);
 	}
@@ -89,6 +108,10 @@ public class ConfigManager {
 	
 	public void reloadLadders() {
 		this.laddersCfg = YamlConfiguration.loadConfiguration(laddersFile);
+	}
+	
+	public void reloadArenas() {
+		this.arenasCfg = YamlConfiguration.loadConfiguration(arenasFile);
 	}
 	
 	public void saveGlobals() {
@@ -114,4 +137,13 @@ public class ConfigManager {
 			Main.getInstance().log(ChatColor.RED + "failed to save ladders.yml");
 		}
 	}
+	
+	public void saveArenas() {
+		try {
+			this.arenasCfg.save(arenasFile);
+		} catch (IOException e) {
+			Main.getInstance().log(ChatColor.RED + "failed to save arenas.yml");
+		}
+	}
+	
 }

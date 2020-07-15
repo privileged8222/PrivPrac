@@ -64,7 +64,9 @@ public class LadderManager {
 	
 	public void add (Ladder ladder) {
 		if (!(ladder == null)) {
-			this.ladders.add(ladder);
+			if (!(this.ladders.contains(ladder))) {
+				this.ladders.add(ladder);
+			}
 		}
 	}
 	
