@@ -36,6 +36,14 @@ public class ScoreboardManager {
 			scoreboardUtils.setSlot(2, "&7pvp.rest");
 			scoreboardUtils.setSlot(1, "&9&m--------------------");
 			break;
+		case INGAME:
+			for (int i = 6; i <= 15; i++) { scoreboardUtils.removeSlot(i); }
+			scoreboardUtils.setSlot(5, "&9&m--------------------");
+			scoreboardUtils.setSlot(4, "&eFighting&6");
+			scoreboardUtils.setSlot(3, " ");
+			scoreboardUtils.setSlot(2, "&7pvp.rest");
+			scoreboardUtils.setSlot(1, "&9&m--------------------");
+			break;
 		}
 		
 		scoreboardUtils.setScoreboard(player);

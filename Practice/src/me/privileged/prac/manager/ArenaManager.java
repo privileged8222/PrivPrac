@@ -9,6 +9,7 @@ import org.bukkit.World;
 
 import me.privileged.prac.arena.Arena;
 import me.privileged.prac.arena.ArenaMode;
+import me.privileged.prac.arena.ArenaUseType;
 import me.privileged.prac.main.Main;
 
 public class ArenaManager {
@@ -34,7 +35,7 @@ public class ArenaManager {
 			Location spawn2 = new Location(Main.getInstance().getServer().getWorld("world"), 0,0,0);
 			spawn2.setX(Double.valueOf(stringSpawnTwo.get(0))); spawn2.setY(Double.valueOf(stringSpawnTwo.get(1))); spawn2.setZ(Double.valueOf(stringSpawnTwo.get(2)));
 			spawn2.setWorld(world);
-			add(new Arena(currentArenaName, mode, spawn1, spawn2, world, uid));
+			add(new Arena(currentArenaName, mode, ArenaUseType.FREE, spawn1, spawn2, world, uid));
 		}
 	}
 	
@@ -55,7 +56,7 @@ public class ArenaManager {
 		Main.getInstance().getConfigManager().getArenas().set("arena." + arenaName + ".uid", convertedId);
 		Main.getInstance().getConfigManager().saveArenas();
 		Main.getInstance().getConfigManager().reloadArenas();
-		add(new Arena(arenaName, mode, new Location(Main.getInstance().getServer().getWorld("world"), 0,0,0), new Location(Main.getInstance().getServer().getWorld("world"), 0,0,0), Main.getInstance().getServer().getWorld("world"), uid));
+		add(new Arena(arenaName, mode, ArenaUseType.FREE, new Location(Main.getInstance().getServer().getWorld("world"), 0,0,0), new Location(Main.getInstance().getServer().getWorld("world"), 0,0,0), Main.getInstance().getServer().getWorld("world"), uid));
 	}
 	
 	public void delete(String name) {
@@ -123,7 +124,7 @@ public class ArenaManager {
 		return null;
 	}
 	
-	public int getLatestArena() {
+	private int getLatestArena() {
 		int counter = 0;
 		List<String> listOfArenas = Main.getInstance().getConfigManager().getArenas().getStringList("arenas");
 		for (@SuppressWarnings("unused") String currentArenaName : listOfArenas) {
@@ -132,7 +133,7 @@ public class ArenaManager {
 		return counter;
 	}
 	
-	public String interpretArenaMode(ArenaMode mode) {
+	private String interpretArenaMode(ArenaMode mode) {
 		String finalReturn = "";
 		switch (mode) {
 		case REGULAR:
@@ -149,7 +150,7 @@ public class ArenaManager {
 		return finalReturn;
 	}
 	
-	public ArenaMode interpretArenaMode(String mode) {
+	private ArenaMode interpretArenaMode(String mode) {
 		ArenaMode finalReturn = ArenaMode.REGULAR;
 		switch (mode) {
 		case "REGULAR":
@@ -184,6 +185,34 @@ public class ArenaManager {
 			finalReturn.add(arena.getFriendlyName());
 		}
 		return finalReturn;
+	}
+	
+	public Arena getArenaForGame() {
+		if (this.arenas.size() > 0) {
+			for (Arena arena : this.arenas) {
+				return arena;
+			}
+		}
+		
+		return null;
+	}
+	
+	public void setArenaSpawnOne(Arena arena, Location location) {
+		Main.getInstance().getConfigManager().reloadArenas();
+		List<String> convertedLocation = Arrays.asList(new String[] {String.valueOf(location.getX()), String.valueOf(location.getY()), String.valueOf(location.getZ())});
+		String convertedWorld = location.getWorld().getName();
+		Main.getInstance().getConfigManager().getArenas().set("arena." + arena.getFriendlyName() + ".spawnone", convertedLocation);
+		Main.getInstance().getConfigManager().saveArenas();
+		Main.getInstance().getConfigManager().reloadArenas();
+	}
+	
+	public void setArenaSpawnTwo(Arena arena, Location location) {
+		Main.getInstance().getConfigManager().reloadArenas();
+		List<String> convertedLocation = Arrays.asList(new String[] {String.valueOf(location.getX()), String.valueOf(location.getY()), String.valueOf(location.getZ())});
+		String convertedWorld = location.getWorld().getName();
+		Main.getInstance().getConfigManager().getArenas().set("arena." + arena.getFriendlyName() + ".spawntwo", convertedLocation);
+		Main.getInstance().getConfigManager().saveArenas();
+		Main.getInstance().getConfigManager().reloadArenas();
 	}
 }
 

@@ -206,4 +206,14 @@ public class LadderManager {
 		return counter;
 	}
 	
+	public Ladder getLadderForGame() {
+		if (this.ladders.size() > 0) {
+			for (Ladder ladder : this.ladders) {
+				return ladder;
+			}
+		}
+		
+		return null;
+	}
+	
 }

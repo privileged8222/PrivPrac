@@ -11,14 +11,16 @@ public class Arena {
 	private Location spawn2;
 	private int uid;
 	private World world;
+	private ArenaUseType use;
 	
-	public Arena(String friendlyName, ArenaMode mode, Location spawn1, Location spawn2, World world, int uid) {
+	public Arena(String friendlyName, ArenaMode mode, ArenaUseType use, Location spawn1, Location spawn2, World world, int uid) {
 		this.friendlyName = friendlyName;
 		this.mode = mode;
 		this.spawn1 = spawn1;
 		this.spawn2 = spawn2;
 		this.uid = uid;
 		this.world = world;
+		this.use = use;
 	}
 
 	public String getFriendlyName() {
@@ -63,6 +65,14 @@ public class Arena {
 
 	public void setWorld(World world) {
 		this.world = world;
+	}
+
+	public ArenaUseType getUse() {
+		return use;
+	}
+
+	public void setUse(ArenaUseType use) {
+		this.use = use;
 	}
 	
 }

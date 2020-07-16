@@ -14,6 +14,7 @@ import me.privileged.prac.events.PlayerJoinLeaveEvent;
 import me.privileged.prac.events.WorldEvents;
 import me.privileged.prac.manager.ArenaManager;
 import me.privileged.prac.manager.ConfigManager;
+import me.privileged.prac.manager.FightManager;
 import me.privileged.prac.manager.LadderManager;
 import me.privileged.prac.manager.PlayerDataManager;
 import me.privileged.prac.tasks.KeepDayTask;
@@ -26,6 +27,7 @@ public class Main extends JavaPlugin{
 	private ConfigManager configManager;
 	private LadderManager ladderManager;
 	private ArenaManager arenaManager;
+	private FightManager fightManager;
 	
 	public void log(String msg) {
 		Bukkit.getServer().getConsoleSender().sendMessage(msg);
@@ -77,6 +79,7 @@ public class Main extends JavaPlugin{
 		this.configManager = new ConfigManager();
 		this.ladderManager = new LadderManager();
 		this.arenaManager = new ArenaManager();
+		this.fightManager = new FightManager();
 	}
 
 	public PlayerDataManager getPlayerDataManager() {
@@ -93,6 +96,10 @@ public class Main extends JavaPlugin{
 
 	public ArenaManager getArenaManager() {
 		return arenaManager;
+	}
+
+	public FightManager getFightManager() {
+		return fightManager;
 	}
 	
 }

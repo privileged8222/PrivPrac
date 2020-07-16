@@ -6,6 +6,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import me.privileged.prac.enums.PlayerGameState;
+import me.privileged.prac.fight.Fight;
+import me.privileged.prac.main.Main;
 
 public class PlayerData {
 	
@@ -65,4 +67,8 @@ public class PlayerData {
 	public Player getPlayer() {
 		return Bukkit.getPlayer(UUID.fromString(this.uuid));
 	}
+	
+	/*public Fight getCurrentFight() {
+		//Main.getInstance().getFightManager().fights
+	}*/
 }

@@ -1,5 +1,6 @@
 package me.privileged.prac.events;
 
+import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -26,5 +27,9 @@ public class PlayerJoinLeaveEvent implements Listener{
 	public void onPlayerJoinEvent(PlayerJoinEvent event) {
 		ScoreboardUtils.create(event.getPlayer());
 		InventoryManager.setupLobbyInventory(event.getPlayer());
+		event.getPlayer().teleport(new Location(Main.getInstance().getServer().getWorld(Main.getInstance().getConfigManager().getGlobals().getString("spawn.world")), 
+				Double.valueOf(Main.getInstance().getConfigManager().getGlobals().getStringList("spawn.location").get(0)),
+				Double.valueOf(Main.getInstance().getConfigManager().getGlobals().getStringList("spawn.location").get(1)),
+				Double.valueOf(Main.getInstance().getConfigManager().getGlobals().getStringList("spawn.location").get(2))));
 	}
 }

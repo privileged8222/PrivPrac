@@ -1,6 +1,10 @@
 package me.privileged.prac.commands;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -32,7 +36,7 @@ public class Prac implements CommandExecutor {
 								sender.sendMessage(ChatColor.RED + "Ladder '" + args[2] + "' cannot be created because it already exists.");
 							}
 						} else {
-							sender.sendMessage(ChatColor.RED + "Usage: /ladder create <name>");
+							sender.sendMessage(ChatColor.RED + "Usage: /prac ladder create <name>");
 						}
 						break;
 					case "delete":
@@ -44,7 +48,7 @@ public class Prac implements CommandExecutor {
 								sender.sendMessage(ChatColor.RED + "Ladder '" + args[2] + "' cannot be deleted because it does not exist.");
 							}
 						} else {
-							sender.sendMessage(ChatColor.RED + "Usage: /ladder delete <name>");
+							sender.sendMessage(ChatColor.RED + "Usage: /prac ladder delete <name>");
 						}
 						break;
 					case "list":
@@ -73,7 +77,18 @@ public class Prac implements CommandExecutor {
 				}
 				break;
 			case "setspawn":
-				sender.sendMessage(ChatColor.RED + "Command is currently unavailable");
+				if (sender instanceof Player) {
+					Location spawn = ((Player) sender).getLocation();
+					String spawnWorld = ((Player) sender).getWorld().getName();
+					String spawnX = String.valueOf(spawn.getX()); String spawnY = String.valueOf(spawn.getY()); String spawnZ = String.valueOf(spawn.getZ()); 
+					List<String> spawnLocation = Arrays.asList(new String[] {spawnX, spawnY, spawnZ});
+					Main.getInstance().getConfigManager().getGlobals().set("spawn.world", spawnWorld);
+					Main.getInstance().getConfigManager().getGlobals().set("spawn.location", spawnLocation);
+					Main.getInstance().getConfigManager().saveGlobals(); Main.getInstance().getConfigManager().reloadGlobals();
+					sender.sendMessage(ChatColor.GREEN + "World spawn set successfully.");
+				} else {
+					sender.sendMessage(ChatColor.RED + "Players only.");
+				}
 				break;
 			case "build":
 				if (sender instanceof Player) {
@@ -104,7 +119,7 @@ public class Prac implements CommandExecutor {
 								sender.sendMessage(ChatColor.RED + "Arena '" + args[2] + "' cannot be created because it already exists.");
 							}
 						} else {
-							sender.sendMessage(ChatColor.RED + "Usage: /arena create <name>");
+							sender.sendMessage(ChatColor.RED + "Usage: /prac arena create <name>");
 						}
 						break;
 					case "delete":
@@ -116,7 +131,47 @@ public class Prac implements CommandExecutor {
 								sender.sendMessage(ChatColor.RED + "Arena '" + args[2] + "' cannot be deleted because it does not exist.");
 							}
 						} else {
-							sender.sendMessage(ChatColor.RED + "Usage: /arena delete <name>");
+							sender.sendMessage(ChatColor.RED + "Usage: /prac arena delete <name>");
+						}
+						break;
+					case "edit":
+						if (args.length > 3) {
+							switch (args[3].toLowerCase()) {
+							case "setspawn":
+								if (sender instanceof Player) {
+									if (args.length > 4) {
+										switch (args[4].toLowerCase()) {
+										case "one":
+											if (Main.getInstance().getArenaManager().doesExist(args[2])) {
+												Main.getInstance().getArenaManager().setArenaSpawnOne(Main.getInstance().getArenaManager().get(args[2]), ((Player)sender).getLocation());
+												sender.sendMessage(ChatColor.GREEN + "Arena '" + args[2] + "' edited successfully.");
+											} else {
+												sender.sendMessage(ChatColor.RED + "Cannot edit arena '" + args[2] + "' because it does not exist.");
+											}
+											break;
+										case "two":
+											if (Main.getInstance().getArenaManager().doesExist(args[2])) {
+												Main.getInstance().getArenaManager().setArenaSpawnTwo(Main.getInstance().getArenaManager().get(args[2]), ((Player)sender).getLocation());
+												sender.sendMessage(ChatColor.GREEN + "Arena '" + args[2] + "' edited successfully.");
+											} else {
+												sender.sendMessage(ChatColor.RED + "Cannot edit arena '" + args[2] + "' because it does not exist.");
+											}
+											break;
+										}
+									} else {
+										sender.sendMessage(ChatColor.RED + "Usage: /prac arena edit <arena> setspawn <one:two>");
+									}
+								} else {
+									sender.sendMessage(ChatColor.RED + "Players only.");
+								}
+							}
+						} else {
+							sender.sendMessage(" ");
+							sender.sendMessage(ChatColor.GOLD + "Help Menu");
+							sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");
+							sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac arena edit <arena> setspawn <one:two>");
+							sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");
+							sender.sendMessage(" ");
 						}
 						break;
 					case "list":
@@ -140,7 +195,39 @@ public class Prac implements CommandExecutor {
 					sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");
 					sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac arena create <name> : " + ChatColor.GOLD + "Create a arena");
 					sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac arena delete <name> : " + ChatColor.GOLD + "Delete a arena");
+					sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac arena edit <name> : " + ChatColor.GOLD + "Edit an arena");
 					sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac arena list : " + ChatColor.GOLD + "Lists all arenas");
+					sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");
+					sender.sendMessage(" ");
+				}
+				break;
+			case "fight":
+				if (args.length > 1) {
+					switch (args[1].toLowerCase()) {
+					case "start":
+						if (args.length == 4) {
+							if (Bukkit.getPlayer(args[2]) != null && Bukkit.getPlayer(args[3]) != null) {
+								Main.getInstance().getFightManager().startNewFight(Bukkit.getPlayer(args[2]), Bukkit.getPlayer(args[3]), Main.getInstance().getLadderManager().getLadderForGame());
+								sender.sendMessage(ChatColor.GREEN + "Fight started successfully.");
+							} else {
+								sender.sendMessage(ChatColor.RED + "Invalid player.");
+							}
+						} else {
+							sender.sendMessage(" ");
+							sender.sendMessage(ChatColor.GOLD + "Help Menu");
+							sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");
+							sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac fight start <player1> <player2> : " + ChatColor.GOLD + "Force start a fight");
+							sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");
+							sender.sendMessage(" ");
+						}
+					}
+					break;
+				} else {
+					sender.sendMessage(" ");
+					sender.sendMessage(ChatColor.GOLD + "Help Menu");
+					sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");
+					sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac fight start <player1> <player2> : " + ChatColor.GOLD + "Force start a fight");
+					sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac fight stop <player> : " + ChatColor.GOLD + "Force stop a fight");
 					sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");
 					sender.sendMessage(" ");
 				}
