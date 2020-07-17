@@ -115,6 +115,7 @@ public class Fight {
 
 			@Override
 			public void run() {
+				winnderData.setGameState(PlayerGameState.NONE); loserData.setGameState(PlayerGameState.NONE);
 				Location spawn = new Location(Main.getInstance().getServer().getWorld("world"), 0,0,0);
 				spawn.setX(Double.valueOf(Main.getInstance().getConfigManager().getGlobals().getStringList("spawn.location").get(0)));
 				spawn.setY(Double.valueOf(Main.getInstance().getConfigManager().getGlobals().getStringList("spawn.location").get(1)));

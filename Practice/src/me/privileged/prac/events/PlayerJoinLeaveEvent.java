@@ -21,6 +21,7 @@ public class PlayerJoinLeaveEvent implements Listener{
 	@EventHandler
 	public void onPlayerQuitEvent(PlayerQuitEvent event) {
 		Main.getInstance().getPlayerDataManager().remove(event.getPlayer().getUniqueId().toString());
+		ScoreboardUtils.remove(event.getPlayer());
 	}
 	
 	@EventHandler
@@ -32,4 +33,5 @@ public class PlayerJoinLeaveEvent implements Listener{
 				Double.valueOf(Main.getInstance().getConfigManager().getGlobals().getStringList("spawn.location").get(1)),
 				Double.valueOf(Main.getInstance().getConfigManager().getGlobals().getStringList("spawn.location").get(2))));
 	}
+
 }

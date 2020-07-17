@@ -1,6 +1,6 @@
 package me.privileged.prac.manager;
 
-import java.util.HashMap;
+import java.util.Scanner;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -24,6 +24,23 @@ public class ScoreboardManager {
 		
 		String title = "&6&lPRACTICE";
 		scoreboardUtils.setTitle(title);
+		int uptime = 1;
+		Player opposition = null;
+		if (playerData.isInGame()) {
+			uptime = Main.getInstance().getFightManager().getFight(player).getRunningTime();
+		
+			opposition = Main.getInstance().getFightManager().getFight(player).getP1() == player ? Main.getInstance().getFightManager().getFight(player).getP2() : Main.getInstance().getFightManager().getFight(player).getP1();
+		}
+		final int MIN = 60, HRS = 3600, DYS = 84600;
+		int days, seconds, minutes, hours, rDays, rHours;
+		
+		//calculations
+		days = uptime/DYS;
+		rDays = uptime%DYS;
+		hours = rDays/HRS;
+		rHours = rDays%HRS;
+		minutes = rHours/MIN;
+		seconds = rHours%MIN;
 		
 		switch (playerData.getGameState()) {
 		case NONE:
@@ -37,9 +54,10 @@ public class ScoreboardManager {
 			scoreboardUtils.setSlot(1, "&9&m--------------------");
 			break;
 		case INGAME:
-			for (int i = 6; i <= 15; i++) { scoreboardUtils.removeSlot(i); }
-			scoreboardUtils.setSlot(5, "&9&m--------------------");
-			scoreboardUtils.setSlot(4, "&eFighting&6");
+			for (int i = 7; i <= 15; i++) { scoreboardUtils.removeSlot(i); }
+			scoreboardUtils.setSlot(6, "&9&m--------------------");
+			scoreboardUtils.setSlot(5, "&eFighting: &6" + opposition.getName());
+			scoreboardUtils.setSlot(4, "&eTime Elapsed: &6" + minutes + ":" + seconds);
 			scoreboardUtils.setSlot(3, " ");
 			scoreboardUtils.setSlot(2, "&7pvp.rest");
 			scoreboardUtils.setSlot(1, "&9&m--------------------");

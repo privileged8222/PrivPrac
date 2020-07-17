@@ -238,6 +238,7 @@ public class Prac implements CommandExecutor {
 				sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");
 				sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac ladder : " + ChatColor.GOLD + "Ladder editor");
 				sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac arena : " + ChatColor.GOLD + "Arena editor");
+				sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac fight : " + ChatColor.GOLD + "Fight manager");
 				sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac setspawn : " + ChatColor.GOLD + "Sets server spawnpoint");
 				sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac build : " + ChatColor.GOLD + "Toggles build mode");
 				sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");
@@ -250,6 +251,7 @@ public class Prac implements CommandExecutor {
 			sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");
 			sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac ladder : " + ChatColor.GOLD + "Ladder editor");
 			sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac arena : " + ChatColor.GOLD + "Arena editor");
+			sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac fight : " + ChatColor.GOLD + "Fight manager");
 			sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac setspawn : " + ChatColor.GOLD + "Sets server spawnpoint");
 			sender.sendMessage(ChatColor.GOLD + " * " + ChatColor.YELLOW + "/prac build : " + ChatColor.GOLD + "Toggles build mode");
 			sender.sendMessage(ChatColor.BLUE + "" + ChatColor.STRIKETHROUGH + "" + ChatColor.BOLD + "----------------------------");

@@ -202,6 +202,7 @@ public class ArenaManager {
 		List<String> convertedLocation = Arrays.asList(new String[] {String.valueOf(location.getX()), String.valueOf(location.getY()), String.valueOf(location.getZ())});
 		String convertedWorld = location.getWorld().getName();
 		Main.getInstance().getConfigManager().getArenas().set("arena." + arena.getFriendlyName() + ".spawnone", convertedLocation);
+		Main.getInstance().getConfigManager().getArenas().set("arena." + arena.getFriendlyName() + ".world", convertedWorld);
 		Main.getInstance().getConfigManager().saveArenas();
 		Main.getInstance().getConfigManager().reloadArenas();
 	}
@@ -211,6 +212,7 @@ public class ArenaManager {
 		List<String> convertedLocation = Arrays.asList(new String[] {String.valueOf(location.getX()), String.valueOf(location.getY()), String.valueOf(location.getZ())});
 		String convertedWorld = location.getWorld().getName();
 		Main.getInstance().getConfigManager().getArenas().set("arena." + arena.getFriendlyName() + ".spawntwo", convertedLocation);
+		Main.getInstance().getConfigManager().getArenas().set("arena." + arena.getFriendlyName() + ".world", convertedWorld);
 		Main.getInstance().getConfigManager().saveArenas();
 		Main.getInstance().getConfigManager().reloadArenas();
 	}
